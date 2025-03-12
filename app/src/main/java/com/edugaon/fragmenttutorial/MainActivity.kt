@@ -20,34 +20,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val nextButton = findViewById<Button>(R.id.nextButton)
-        val previousButton = findViewById<Button>(R.id.previousButton)
-        var fragmentIndex = 0
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FirstFragment()).commitNow()
-
-        nextButton.setOnClickListener {
-            if (fragmentIndex==0){
-                fragmentIndex = 1
-                val fragment = SecondFragment()
-                val bundle = Bundle()
-                bundle.putString("fragmentName_key", "SecondFragment")
-
-                fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commitNow()
-            }
-        }
-        previousButton.setOnClickListener {
-            if (fragmentIndex==1){
-                fragmentIndex = 0
-                val fragment = FirstFragment()
-                val bundle = Bundle()
-                bundle.putString("fragmentName_key", "FirstFragment")
-
-                fragment.arguments = bundle
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commitNow()
-            }
-        }
-
     }
 
 }

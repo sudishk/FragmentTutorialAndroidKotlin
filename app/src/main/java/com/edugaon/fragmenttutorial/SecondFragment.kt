@@ -35,13 +35,16 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val layout = inflater.inflate(R.layout.fragment_second, container, false)
+       val layout =inflater.inflate(R.layout.fragment_second, container, false)
+        layout.setOnClickListener {
 
-        val fragmentName = arguments?.getString("fragmentName_key")
-        Toast.makeText(requireActivity(), "$fragmentName", Toast.LENGTH_SHORT).show()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, FirstFragment())?.commitNow()
+
+        }
 
         return  layout
     }
+
 
     companion object {
         /**

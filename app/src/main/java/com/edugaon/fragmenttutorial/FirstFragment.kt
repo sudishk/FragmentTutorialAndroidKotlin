@@ -33,11 +33,12 @@ class FirstFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val layout = inflater.inflate(R.layout.fragment_first, container, false)
+        val layout =  inflater.inflate(R.layout.fragment_first, container, false)
 
-        val fragmentName = arguments?.getString("fragmentName_key")
-        Toast.makeText(requireActivity(), "$fragmentName", Toast.LENGTH_SHORT).show()
+        layout.setOnClickListener{
+           activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, SecondFragment())?.commitNow()
 
+        }
 
         return  layout
     }
