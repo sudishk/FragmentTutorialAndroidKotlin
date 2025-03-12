@@ -21,51 +21,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         val nextButton = findViewById<Button>(R.id.nextButton)
-        val prevButton = findViewById<Button>(R.id.prevButton)
-        val fragmentContainer = findViewById<FrameLayout>(R.id.fragmentContainer)
-        var count = 0
-        changeFragment(FirstFragment())
+        val previousButton = findViewById<Button>(R.id.previousButton)
+        var fragmentIndex = 0
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FirstFragment()).commitNow()
+
         nextButton.setOnClickListener {
+            if (fragmentIndex==0){
+                fragmentIndex = 1
+                val fragment = SecondFragment()
+                val bundle = Bundle()
+                bundle.putString("fragmentName_key", "SecondFragment")
 
-            if (count==0){
-                count++
-                changeFragment(SecondFragment())
-                // second fragment
-            }else if (count==1){
-                count++
-                changeFragment(ThirdFragment())
-
-                // third fragment
-            }else {
-                count=0
-                changeFragment(FirstFragment())
-                // first fragment
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commitNow()
             }
         }
+        previousButton.setOnClickListener {
+            if (fragmentIndex==1){
+                fragmentIndex = 0
+                val fragment = FirstFragment()
+                val bundle = Bundle()
+                bundle.putString("fragmentName_key", "FirstFragment")
 
-        prevButton.setOnClickListener {
-
-            if (count==0){
-                count = 2
-                changeFragment(ThirdFragment())
-                // third fragment
-            }else if (count==2){
-                count--
-                changeFragment(SecondFragment())
-
-                // second fragment
-            }else {
-                count=0
-                changeFragment(FirstFragment())
-                // first fragment
+                fragment.arguments = bundle
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commitNow()
             }
         }
 
     }
-
-    fun changeFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commitNow()
-    }
-
 
 }
